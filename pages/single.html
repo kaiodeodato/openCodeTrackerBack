@@ -1,0 +1,22 @@
+<%- include('partials/header.html') %>
+
+    <section class="container">
+                <div class="single_box m-5">
+                    <div class="single_box_img m-5">
+                        <img class="" src=<%= post.image %> alt="">
+                    </div>
+                    <div class="single-box-info">
+                        <span><%= post.tecnologies %></span>
+                        <h2><%= post.title %></h2>
+                        <p><%= post.content1 %></p>
+                        <h4 class="single-views"><%= post.views %> views - <a href="/">Posts</a></h4>          
+                        <pre><%= post.content2 %></pre>
+                        <h4 class="single-views"><%= post.date %></h4>                 
+                    </div> 
+                </div>
+
+    </section>
+    
+<%- include('partials/footer.html') %>
+
+    
