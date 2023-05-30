@@ -187,25 +187,12 @@ app.get('/api/:fragment',(req,res)=>{
     })
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.get('/api/title/:fragment',(req,res)=>{
+    Posts.find({title: req.params.fragment})
+    .then((post)=>{
+        res.json(post)
+    })
+})
 
 
 
