@@ -144,7 +144,7 @@ app.post('/admin/post', (req,res)=>{
     Posts.create({
         title: req.body.title,
         image: req.body.image,
-        tecnologies: req.body.tecnologies,
+        tecnologies: req.body.tecnologies.split(',').map((tech) => tech.trim()),
         content1: content1,
         content2: req.body.content2,
         slug: truncatedContent1,
