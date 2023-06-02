@@ -70,7 +70,7 @@ app.get('/',(req,res)=>{
         .then((posts)=>{
             res.render('home', {posts: posts})
         }).catch((err)=>{
-            res.render('home', {})
+            res.redirect('/')
             console.log(err)
         })
     }else{
@@ -216,6 +216,21 @@ app.get('/api/views/trending',(req,res)=>{
         res.status(500).json({ error: 'An error occurred' });
       });
 })
+
+app.get('/api/category/search/:name', (req, res) => {
+    const technology = req.params.name;
+
+
+    Posts.find({ tecnologies: { $regex: new RegExp(technology, 'i') } }) 
+    .sort({ _id: -1 })
+    .then((posts) => {
+      res.json(posts);
+    })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
+  });
 
 
 
