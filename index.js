@@ -206,7 +206,7 @@ app.get('/api/title/:fragment',(req,res)=>{
       });
 })
 
-app.get('/api/trending',(req,res)=>{
+app.get('/api/views/trending',(req,res)=>{
     Posts.find({})
     .sort({ views: -1 })
     .then((post)=>{
