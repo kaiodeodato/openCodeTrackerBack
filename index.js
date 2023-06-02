@@ -159,7 +159,10 @@ app.get('/admin/delete/:id',(req,res)=>{
     Posts.deleteOne({_id:req.params.id})
     .then(()=>{
         res.redirect('/admin')
-    })
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
 })
 //logout
 app.get('/logout', (req, res) => {
@@ -177,21 +180,41 @@ app.get('/api',(req,res)=>{
     Posts.find({})
     .then((data)=> {
         res.json(data)
-    })
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
 })
 
 app.get('/api/:fragment',(req,res)=>{
     Posts.find({content1: {$regex: req.params.fragment, $options: "i"}})
     .then((posts)=>{
         res.json(posts)
-    })
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
 })
 
 app.get('/api/title/:fragment',(req,res)=>{
     Posts.find({title: req.params.fragment})
     .then((post)=>{
         res.json(post)
-    })
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
+})
+
+app.get('/api/trending',(req,res)=>{
+    Posts.find({})
+    .sort({ views: -1 })
+    .then((post)=>{
+        res.json(post)
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
 })
 
 
