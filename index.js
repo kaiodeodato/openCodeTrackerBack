@@ -197,7 +197,10 @@ app.get('/api/:fragment',(req,res)=>{
 })
 
 app.get('/api/title/:fragment',(req,res)=>{
-    Posts.find({title: req.params.fragment})
+    Posts.findOneAndUpdate(
+        {title: req.params.fragment},
+        {$inc: {views: 1}},
+        {new: true})
     .then((post)=>{
         res.json(post)
     }).catch((error) => {
@@ -219,7 +222,6 @@ app.get('/api/views/trending',(req,res)=>{
 
 app.get('/api/category/search/:name', (req, res) => {
     const technology = req.params.name;
-
 
     Posts.find({ tecnologies: { $regex: new RegExp(technology, 'i') } }) 
     .sort({ _id: -1 })
