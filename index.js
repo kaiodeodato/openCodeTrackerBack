@@ -229,7 +229,7 @@ app.get('/api/views/trending',(req,res)=>{
 app.get('/api/category/search/:name', (req, res) => {
     const technology = req.params.name;
 
-    Posts.find({ tecnologies: { $regex: new RegExp(technology, 'i') } }) 
+    Posts.find({ tecnologies: { $regex: `\\b${technology}\\b`, $options: 'i' } })
     .sort({ _id: -1 })
     .then((posts) => {
       res.json(posts);
