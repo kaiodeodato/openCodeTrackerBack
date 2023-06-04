@@ -110,8 +110,9 @@ var usuarios = [
 // access to the admin-panel
 
 app.get('/admin',(req,res)=>{
+
     if(req.session.login == null){
-        res.render('admin-login')
+        res.render('admin-login', {msg:''})
     }else{
         Posts.find({})
         .sort({_id: -1})
@@ -123,16 +124,21 @@ app.get('/admin',(req,res)=>{
 
 // login session
 app.post('/admin',(req,res)=>{
-    usuarios.map((item)=>{
-        console.log(req.body.login, req.body.password)
-        if(item.login == req.body.login && item.password == req.body.password){
-            req.session.login = req.body.login
-            console.log(req.session.login)
-        }else{
-            console.log('nao')
-        }
-    })
-    res.redirect('/admin')
+    let loggedIn = false;
+
+    usuarios.map((item) => {
+      console.log(req.body.login, req.body.password);
+      if (item.login == req.body.login && item.password == req.body.password) {
+        req.session.login = req.body.login;
+        loggedIn = true;
+      }
+    });
+  
+    if (loggedIn) {
+      res.redirect('/admin');
+    } else {
+      res.render('admin-login', { msg: 'Invalid login credentials' });
+    }
 })
 
 app.post('/admin/post', (req,res)=>{
