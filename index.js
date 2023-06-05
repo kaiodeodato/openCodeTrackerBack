@@ -142,7 +142,8 @@ app.post('/admin',(req,res)=>{
 })
 
 app.post('/admin/post', (req,res)=>{
-
+    const content1 = req.body.content1;
+   
 
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString();
