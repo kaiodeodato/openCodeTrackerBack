@@ -142,8 +142,7 @@ app.post('/admin',(req,res)=>{
 })
 
 app.post('/admin/post', (req,res)=>{
-    const content1 = req.body.content1;
-    const truncatedContent1 = content1.substring(0, 25) + '...';
+
 
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString();
@@ -153,7 +152,7 @@ app.post('/admin/post', (req,res)=>{
         tecnologies: req.body.tecnologies.split(',').map((tech) => tech.trim()),
         content1: content1,
         content2: req.body.content2,
-        slug: truncatedContent1,
+        slug: req.body.title,
         date: formattedDate,
         views: 0
     })
