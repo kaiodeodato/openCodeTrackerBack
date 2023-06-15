@@ -42,7 +42,12 @@ app.use(cors())
 // this line adds the express-session middleware to the application.
 // It configures session handling with a secret key and sets the maximum age of the session cookie
 // to 6000000 milliseconds (100 minutes)
-app.use(session({secret: 'sebsetbafveb', cookie: {maxAge: 6000000}}))
+app.use(session({
+    secret: 'sebsetbafveb',
+    cookie: { maxAge: 6000000 },
+    resave: false, // Add this line to specify resave option
+    saveUninitialized: true // Add this line to specify saveUninitialized option
+  }));
 // these lines add the body-parser middleware to the app. The first line parses
 // incoming requests with JSON payloads, and the second line parses incoming request 
 // with URL-encoded payloads.
@@ -244,7 +249,6 @@ app.get('/api/category/search/:name', (req, res) => {
 
 // this code starts the Express application and listen for incoming HTTP request on the specifiel port
 // and logs a message saying that the server is running
-app.listen(port,()=> {
+app.listen(port, () => {
     console.log('server is running on port 5000');
-})
-
+  });
